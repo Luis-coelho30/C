@@ -1,3 +1,4 @@
+//Tipo abstrato de dados Pilha implementado por meio de uma lista simplesmente ligada sem cabeca.
 #include <stdlib.h>
 #include <stdio.h>
 #include "Booleano.h"

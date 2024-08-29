@@ -1,3 +1,4 @@
+//Tipo abstrato de dados Fila implementado por meio de uma lista duplamente ligada.
 #include <stdlib.h>
 #include <stdio.h>
 #include "Booleano.h"
