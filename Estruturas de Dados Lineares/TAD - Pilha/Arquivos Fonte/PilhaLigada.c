@@ -14,7 +14,7 @@ Pilha criarPilhaVazia();
 bool verPilhaVazia(Pilha);             
 int obterProfundidade(Pilha);              		
 void mostrarPilha(Pilha);
-void peek(Pilha);              						
+int peek(Pilha);              						
 void push(Pilha*, int);           	
 void pop(Pilha*);
 void esvaziaPilha(Pilha*);
@@ -64,13 +64,13 @@ void mostrarPilha(Pilha ap) {
 	printf("\n");
 }   
 
-void peek(Pilha ap) {
+int peek(Pilha ap) {
 	Celula *p = ap;
-	printf("\n");
+	int elemento = ghost;
 	if(p!=NULL) {
-		printf("%d\t", p->item);
-	}	
-	printf("\n");
+		elemento = p->item;
+	}
+	return elemento;
 }   
 		
 void push(Pilha *ap, int y) {

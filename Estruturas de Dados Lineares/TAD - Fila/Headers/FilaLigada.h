@@ -21,7 +21,7 @@ Fila criarFila();
 bool verFilaVazia(Fila *);		 
 int obterTamanho(Fila *);			 
 void mostrarFila(Fila *);		
-void peekFila(Fila *); 
+int peekFila(Fila *); 
 void pushFila(Fila *, int);
 void popFila(Fila *);
 void esvaziarFila(Fila *);
@@ -71,11 +71,13 @@ void mostrarFila(Fila *ap)
 	printf("\n");
 }
 
-void peekFila(Fila *ap) {
-	if(ap->inicio!=NULL) {
-		Celula *p = ap->inicio;
-		printf("\n%d\n", p->elemento);
+int peekFila(Fila *ap) {
+	Celula *p = ap->inicio;
+	int elemento = ghost;
+	if(p!=NULL) {
+		elemento = p->elemento;
 	}
+	return elemento;
 }
 
 void pushFila(Fila *ap, int y)

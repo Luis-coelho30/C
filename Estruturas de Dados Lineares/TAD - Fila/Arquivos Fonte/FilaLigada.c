@@ -23,6 +23,7 @@ int obterTamanho(Fila *);
 void mostrarFila(Fila *);		 
 void pushFila(Fila *, int);
 void popFila(Fila *);
+int peekFila(Fila *);
 void esvaziarFila(Fila *);
 
 int main()
@@ -132,6 +133,15 @@ void popFila(Fila *ap)
 		free(removida);
 		ap->tamanho--;
 	}
+}
+
+int peekFila(Fila *ap) {
+	Celula *p = ap->inicio;
+	int elemento = ghost;
+	if(p!=NULL) {
+		elemento = p->elemento;
+	}
+	return elemento;
 }
 
 void esvaziarFila(Fila *ap)
