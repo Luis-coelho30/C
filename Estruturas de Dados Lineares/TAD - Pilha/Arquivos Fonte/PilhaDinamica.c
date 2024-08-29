@@ -69,7 +69,7 @@ void esvaziarPilha(Pilha A) {
 
 void mostrarPilha(Pilha A) {
 	int i;
-	for(i = A->topo; i!=sinal; i--) //(i = A->topo; i>=1; i--)
+	for(i = A->topo; i!=sinal; i--) 
 		printf("%c\n", A->Vetor[i]);
 }
 

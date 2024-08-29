@@ -22,9 +22,32 @@ int obterProfundidade(Pilha *A);
 int obterTamanho();
 void copy(Pilha *Orig, Pilha *Dest);
 void inverter(Pilha *A);
+//PancakeSort
 void criarPilhaEmbaralhada(Pilha *A, int n);
 void inverterParte(Pilha *A, int n);
 int contarPilha(Pilha *A, int n);
+
+int main() {
+	
+	Pilha A;
+	criarPilha(&A);
+	Pilha B;
+	criarPilha(&B);
+	Pilha C;
+	criarPilha(&C);
+	Pilha D;
+	criarPilha(&D);
+	pushPilha(&A, 1);
+	pushPilha(&A, 5);
+	pushPilha(&A, 1);
+	pushPilha(&A, 3);
+	pushPilha(&A, 7);
+	printf("\nTamanho A = %d\n", obterProfundidade(&A));
+	printf("\nTamanho B = %d\n", obterProfundidade(&B));
+	printf("\nTamanho C = %d\n", obterProfundidade(&C));
+	printf("\nTamanho D = %d\n", obterProfundidade(&D));
+	return 0;
+}
 
 void criarPilha(Pilha *A) {
 	A->topo = sinal;
@@ -68,7 +91,7 @@ void esvaziarPilha(Pilha *A) {
 
 void mostrarPilha(Pilha *A) {
 	int i;
-	for(i = A->topo; i>=1; i--) //(i = A->topo; i>=1; i--)
+	for(i = A->topo; i!=sinal; i--) 
 		printf("%d\n", A->Vetor[i]);
 }
 
@@ -81,13 +104,13 @@ int obterProfundidade(Pilha *A) {
 void copy(Pilha *Orig, Pilha *Dest) {
 	int i;
 	Dest->topo = Orig->topo;
-	for(i=1; i<=obterProfundidade(Orig); i++)
+	for(i=1; i<=Orig->topo; i++)
 		Dest->Vetor[i] = Orig->Vetor[i];
 	
 }
 
 void inverter(Pilha *A) {
-	int i=1, j=obterProfundidade(A);
+	int i=1, j=A->topo;
 	int aux;
 	while(i<j) {
 		aux = A->Vetor[j];
@@ -102,7 +125,6 @@ int obterTamanho() {
 	return MaxPilha-1;
 }
 
-//Para pancakeSort
 void criarPilhaEmbaralhada(Pilha *A, int n) {
 	A->topo=n;
 	int V[101];
@@ -139,12 +161,12 @@ void inverterParte(Pilha *A, int n) {
 }
 
 int contarPilha(Pilha *A, int n) {
-	int i=1, pos=0;
-	while(i<=A->topo && A->Vetor[i]!=n) {
-		i++;
+	int i=A->topo, pos=0;
+	while(i>=1 && A->Vetor[i]!=n) {
+		i--;
 	}
 	if(A->Vetor[i]==n) 
-		pos=A->topo - i;
+		pos=A->topo - i + 1;
 		
 	return pos;
 }
