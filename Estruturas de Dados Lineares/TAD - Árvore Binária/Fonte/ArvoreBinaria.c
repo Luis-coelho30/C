@@ -24,6 +24,7 @@ void mostrarArvore_Red(Arvore);
 void mostrarArvore_edR(Arvore); 
 void mostrarArvore_eRd(Arvore); 
 void mostrarArvore_BFS(Arvore); 
+void mostrarPorNivel(Arvore);
 Arvore construirArvoreRam(int); 
 No* buscar(Arvore, int); 
 int obterAlturaRec(Arvore); 
@@ -62,7 +63,17 @@ No* obterSeguinte_edR(Arvore, int);
 
 int main() {
     srand(time(NULL));
-    
+    Arvore subArvoreDireita = criarArvoreVazia();
+    subArvoreDireita = construirArvore(11, criarArvoreVazia(), criarArvoreVazia()); // Nó 11
+    subArvoreDireita = construirArvore(12, subArvoreDireita, criarArvoreVazia());   // Nó 12 com filho esquerdo 11
+    subArvoreDireita = construirArvore(15, subArvoreDireita, criarArvoreVazia());   // Nó 15 com filho esquerdo 12
+
+    Arvore subArvoreEsquerda = criarArvoreVazia();
+    subArvoreEsquerda = construirArvore(5, criarArvoreVazia(), criarArvoreVazia()); // Nó 5
+    subArvoreEsquerda = construirArvore(7, subArvoreEsquerda, criarArvoreVazia());  // Nó 7 com filho esquerdo 5
+
+    Arvore arvoreMista = construirArvore(10, subArvoreEsquerda, subArvoreDireita);
+    mostrarPorNivel(arvoreMista);
     return 0;
 }
 
@@ -121,6 +132,31 @@ void mostrarArvore_BFS(Arvore ap) { //Fila
             if(p->dir!=NULL)    pushFila(&f, p->dir);
         } while(verFilaVazia(&f) == FALSE);
     }
+}
+
+void mostrarPorNivel(Arvore ap) { //Usando o caminhamento BFS
+    int numNosNivel;
+    No *p; Fila f;
+    if(ap!=NULL) {
+        f = criarFila(); p = ap; pushFila(&f, p);
+        
+        do {
+            numNosNivel = obterTamanho(&f);
+            while(numNosNivel--) {
+                p = acessarFila(&f);
+                printf("%d\t", p->elemento);
+                if(p->esq!=NULL) {
+                    pushFila(&f, p->esq);
+                }
+                if(p->dir!=NULL) {    
+                    pushFila(&f, p->dir);
+                }
+                popFila(&f);
+            }
+            printf("\n");
+        } while(verFilaVazia(&f) == FALSE);
+    }
+    
 }
 
 int obterAlturaRec(Arvore ap) {
