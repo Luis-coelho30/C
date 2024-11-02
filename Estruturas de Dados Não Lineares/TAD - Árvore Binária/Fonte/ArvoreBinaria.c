@@ -275,41 +275,46 @@ void mostrarArvore_Red_Nrec(Arvore ap) {
     }
 }
 
-void mostrarArvore_edR_Nrec(Arvore ap) {
+void mostrarArvore_edR_Nrec(Arvore ap) { 
     if (ap == NULL) {
         printf("\n arvore vazia \n");
     }
+    else {
+        Pilha s1 = criarPilhaVazia();
+        Pilha s2 = criarPilhaVazia();
 
-    Pilha s1 = criarPilhaVazia();
-    Pilha s2 = criarPilhaVazia();
+        // Adiciona a raiz na primeira pilha
+        push(&s1, ap);
 
-    // Adiciona a raiz na primeira pilha
-    push(&s1, ap);
+        // Processa todos os nós na primeira pilha
+        while (!verPilhaVazia(s1))
+        {
+            // Remove o nó da pilha1 e coloca na pilha2
+            No *p = peek(s1);
+            pop(&s1);
 
-    // Processa todos os nós na primeira pilha
-    while (!verPilhaVazia(s1)) {
-        // Remove o nó da pilha1 e coloca na pilha2
-        No* p = peek(s1);
-        pop(&s1);
+            push(&s2, p);
 
-        push(&s2, p);
+            // Adiciona o filho esquerdo
+            if (p->esq != NULL)
+            {
+                push(&s1, p->esq);
+            }
 
-        // Adiciona o filho esquerdo
-        if (p->esq != NULL) {
-            push(&s1, p->esq);
+            // Adiciona o filho direito
+            if (p->dir != NULL)
+            {
+                push(&s1, p->dir);
+            }
         }
 
-        // Adiciona o filho direito
-        if (p->dir != NULL) {
-            push(&s1, p->dir);
+        // A pilha2 agora contém os nós em pós-ordem
+        while (!verPilhaVazia(s2))
+        {
+            No *p = peek(s2);
+            pop(&s2);
+            printf("%d\n", p->elemento);
         }
-    }
-
-    // A pilha2 agora contém os nós em pós-ordem
-    while (!verPilhaVazia(s2)) {
-        No* p = peek(s2);
-        pop(&s2);
-        printf("%d\n", p->elemento);
     }
 }
 
